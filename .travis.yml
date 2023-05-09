@@ -14,7 +14,7 @@ after_success:
   - docker build -t bugmakerwen/muiti-server ./server
   - docker build -t bugmakerwen/muiti-worker ./worker
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-  - docker push bugmakerwen/multi-client
-  - docker push bugmakerwen/multi-nginx
-  - docker push bugmakerwen/multi-server
-  - docker push bugmakerwen/multi-worker
+  - docker push bugmakerwen/muiti-client
+  - docker push bugmakerwen/muiti-nginx
+  - docker push bugmakerwen/muiti-server
+  - docker push bugmakerwen/muiti-worker
