@@ -1,0 +1,20 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t bugmakerwen/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - - docker run -e CI=true bugmakerwen/react-test npm test
+
+after_success:
+  - docker build -t bugmakerwen/muiti-client ./client
+  - docker build -t bugmakerwen/muiti-nginx ./nginx
+  - docker build -t bugmakerwen/muiti-server ./server
+  - docker build -t bugmakerwen/muiti-worker ./worker
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  - docker push bugmakerwen/multi-client
+  - docker push bugmakerwen/multi-nginx
+  - docker push bugmakerwen/multi-server
+  - docker push bugmakerwen/multi-worker
