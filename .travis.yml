@@ -17,4 +17,13 @@ after_success:
   - docker push bugmakerwen/muiti-client
   - docker push bugmakerwen/muiti-nginx
   - docker push bugmakerwen/muiti-server
-  - docker push bugmakerwen/muiti-worker
+  - docker push bugmakerwen/muiti-worker 
+
+deploy:
+  region: us-west-2
+  app: multi-docker
+  env: MultiDocker-env
+  bucket_name: elasticbeanstalk-us-west-2-764711331808
+  bucket_path: docker-multi
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
